@@ -1,4 +1,7 @@
 import sys
+import json
+import urllib.request
+from typing import List
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QWidget, QLabel
 
@@ -10,7 +13,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Eilert Tunheim - BE-CSS-GTA-2025-83-GRAE Exercise")
         self.setFixedSize(QSize(600, 400))
         
-        # VBoxLayout config
+        # Central widget and layout
         central_widget = QWidget()
         vbox = QVBoxLayout()
         
@@ -20,13 +23,23 @@ class MainWindow(QMainWindow):
         # Label config
         self.label = QLabel("")
         
-        # Add widget
+        # Add widgets
         vbox.addWidget(self.combobox)
         vbox.addWidget(self.label)
-        
-        # Central widget
         central_widget.setLayout(vbox)
         self.setCentralWidget(central_widget)
+
+        # Fetch countries
+        self.countries = fetch_country_names()
+
+
+def fetch_country_names() -> List[str]:
+    url = "https://www.apicountries.com/countries"
+    with urllib.request.urlopen(url) as response:
+        raw_data = response.read()
+        data = json.loads(raw_data.decode("utf-8"))
+        country_names = [item["name"] for item in data if "name" in item]
+        return sorted(country_names)
 
 
 # Start app
