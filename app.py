@@ -29,9 +29,9 @@ class MainWindow(QMainWindow):
         central_widget.setLayout(vbox)
         self.setCentralWidget(central_widget)
 
-        # Fetch countries
-        self.countries = fetch_country_names()
-
+        # Fetch countries and add to combobox
+        countries = fetch_country_names()
+        self.combobox.addItems(countries)
 
 def fetch_country_names() -> List[str]:
     url = "https://www.apicountries.com/countries"
