@@ -43,10 +43,14 @@ class MainWindow(QMainWindow):
 def fetch_country_names() -> List[str]:
     url = "https://www.apicountries.com/countries"
     with urllib.request.urlopen(url) as response:
-        raw_data = response.read()
-        data = json.loads(raw_data.decode("utf-8"))
-        country_names = [item["name"] for item in data if "name" in item]
-        return sorted(country_names)
+        raw_json_data = response.read()
+        return parse_json_data(raw_json_data)
+
+
+def parse_json_data(json_str: str) -> List[str]:
+    data = json.loads(json_str.decode("utf-8"))
+    country_names = [item["name"] for item in data if "name" in item]
+    return sorted(country_names)
 
 
 # Start app
