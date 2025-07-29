@@ -1,9 +1,7 @@
 import sys
-import json
-import urllib.request
-from typing import List
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QWidget, QLabel
+from helper_functions import fetch_country_names
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -38,19 +36,6 @@ class MainWindow(QMainWindow):
 
     def update_label(self, text: str):
         self.label.setText(f"Selected: {text}")
-
-
-def fetch_country_names() -> List[str]:
-    url = "https://www.apicountries.com/countries"
-    with urllib.request.urlopen(url) as response:
-        raw_json_data = response.read()
-        return parse_json_data(raw_json_data)
-
-
-def parse_json_data(json_str: str) -> List[str]:
-    data = json.loads(json_str.decode("utf-8"))
-    country_names = [item["name"] for item in data if "name" in item]
-    return sorted(country_names)
 
 
 # Start app

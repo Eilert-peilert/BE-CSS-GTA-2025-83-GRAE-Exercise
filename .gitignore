@@ -20,5 +20,10 @@ pythonenv*
 # JetBrains
 .idea
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Misc
 temp
