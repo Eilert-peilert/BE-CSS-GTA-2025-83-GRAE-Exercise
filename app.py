@@ -32,6 +32,13 @@ class MainWindow(QMainWindow):
         # Fetch countries and add to combobox
         countries = fetch_country_names()
         self.combobox.addItems(countries)
+        
+        # On select country, update label text to the selected country
+        self.combobox.currentTextChanged.connect(self.update_label)
+
+    def update_label(self, text: str):
+        self.label.setText(f"Selected: {text}")
+
 
 def fetch_country_names() -> List[str]:
     url = "https://www.apicountries.com/countries"
