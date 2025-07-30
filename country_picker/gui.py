@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtCore import QSize
 from PyQt6.QtWidgets import QApplication, QMainWindow, QComboBox, QVBoxLayout, QWidget, QLabel
-from helper_functions import fetch_country_names
+from .helper_functions import fetch_country_names
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -36,10 +36,3 @@ class MainWindow(QMainWindow):
 
     def update_label(self, text: str):
         self.label.setText(f"Selected: {text}")
-
-
-# Start app
-app = QApplication(sys.argv)
-window = MainWindow()
-window.show()
-app.exec()
