@@ -1,6 +1,6 @@
 import pytest
 import json
-from helper_functions import parse_json_data
+from country_picker.helper_functions import parse_json_data
 
 
 def test_parse_country_names_valid_json():
